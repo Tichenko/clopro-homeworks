@@ -1,0 +1,24 @@
+#cloud-config
+users:
+  - name: ${user}
+    groups: sudo
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    ssh_authorized_keys:
+      - ${ssh_key}
+write_files:
+- content: |
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <title>Picture</title>
+        </head>
+        <body>
+            <a href=${url}>link to picture</a>
+            <img src=${url} alt="picture" />
+        </body>
+    </html>
+  path: /var/www/html/index.html
+  owner: root:root
+  permissions: '0644'
